@@ -1,5 +1,5 @@
 import { HomeHeader } from '@/components/HomeHeader';
-import { View } from 'react-native';
+import { StatusBar, View } from 'react-native';
 import { Target } from '@/components/Target';
 import { List } from '@/components/List';
 import { Button } from '@/components/Button';
@@ -38,6 +38,7 @@ const targets = [
 export default function Index() {
   return (
     <View style={{ flex: 1, paddingBottom: 14 }}>
+      <StatusBar translucent backgroundColor="transparent" />
       <HomeHeader data={summary} />
 
       <List
