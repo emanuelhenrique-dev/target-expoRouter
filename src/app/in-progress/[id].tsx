@@ -13,7 +13,7 @@ export default function InProgress() {
         gap: 15
       }}
     >
-      <Text>ID: {params.id}</Text>
+      <Text>Meta com ID: {params.id}</Text>
 
       <Button title="Voltar" onPress={() => router.back()} />
     </View>
