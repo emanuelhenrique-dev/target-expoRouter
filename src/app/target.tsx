@@ -1,4 +1,5 @@
 import { Button } from '@/components/Button';
+import { CurrencyInput } from '@/components/CurrencyInput';
 import { Input } from '@/components/Input';
 import { PageHeader } from '@/components/PageHeader';
 import { StatusBar, View } from 'react-native';
@@ -11,10 +12,6 @@ export default function Target() {
         <PageHeader
           title="Meta"
           subtitle="Economize para alcançar sua meta financeira."
-          rightButton={{
-            icon: 'edit',
-            onPress: () => {}
-          }}
         />
       </View>
 
@@ -23,6 +20,7 @@ export default function Target() {
           label="Nova meta"
           placeholder="Ex: Viagem para praia, Apple Watch"
         />
+        <CurrencyInput label="Valor alvo" value={1240.43} />
         <Button title="Salvar" />
       </View>
     </View>

@@ -6,7 +6,7 @@ import { router } from 'expo-router';
 
 interface Props {
   title: string;
-  subtitle: string;
+  subtitle?: string;
   rightButton?: {
     onPress: () => void;
     icon: keyof typeof MaterialIcons.glyphMap;
