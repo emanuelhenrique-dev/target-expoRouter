@@ -66,7 +66,7 @@ export default function InProgress() {
         emptyMessage="Nenhuma transação. Toque em nova transação para guardar seu primeiro dinheiro aqui."
       />
 
-      <View style={{ paddingBottom: 16 }}>
+      <View style={{ paddingBottom: 32 }}>
         <Button
           title="Nova transação"
           onPress={() => router.navigate(`/transaction/ ${params.id}`)}
