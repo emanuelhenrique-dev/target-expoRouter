@@ -2,9 +2,46 @@ import { Button } from '@/components/Button';
 import { CurrencyInput } from '@/components/CurrencyInput';
 import { Input } from '@/components/Input';
 import { PageHeader } from '@/components/PageHeader';
-import { StatusBar, View } from 'react-native';
+import { router, useLocalSearchParams } from 'expo-router';
+import { useState } from 'react';
+import { Alert, StatusBar, View } from 'react-native';
 
 export default function Target() {
+  const [name, setName] = useState('');
+  const [amount, setAmount] = useState(0);
+  const [isProcessing, setIsProcessing] = useState(false);
+
+  const param = useLocalSearchParams<{ id?: string }>();
+
+  function handleSave() {
+    if (!name.trim() || amount <= 0) {
+      return Alert.alert(
+        'Atenção',
+        'Preencha o nome e o valor precisa ser maior que zero'
+      );
+    }
+
+    setIsProcessing(true);
+
+    if (param.id) {
+      // update
+    } else {
+      create();
+    }
+  }
+
+  async function create() {
+    try {
+      Alert.alert('Nova meta', 'Meta criada com sucesso', [
+        { text: 'Ok', onPress: router.back }
+      ]);
+    } catch (error) {
+      Alert.alert('Error', 'Não foi possível criar a meta');
+      console.log(error);
+      setIsProcessing(false);
+    }
+  }
+
   return (
     <View style={{ flex: 1, padding: 32 }}>
       <StatusBar barStyle="dark-content" />
@@ -19,9 +56,19 @@ export default function Target() {
         <Input
           label="Nova meta"
           placeholder="Ex: Viagem para praia, Apple Watch"
+          value={name}
+          onChangeText={setName}
         />
-        <CurrencyInput label="Valor alvo" value={1240.43} />
-        <Button title="Salvar" />
+        <CurrencyInput
+          label="Valor alvo"
+          value={amount}
+          onChangeValue={setAmount}
+        />
+        <Button
+          title="Salvar"
+          onPress={handleSave}
+          isProcessing={isProcessing}
+        />
       </View>
     </View>
   );
