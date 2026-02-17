@@ -9,9 +9,13 @@ import {
 } from '@expo-google-fonts/inter';
 import { Loading } from '@/components/Loading';
 
+import { useDrizzleStudio } from 'expo-drizzle-studio-plugin';
+import * as SQLite from 'expo-sqlite';
 import { SQLiteProvider } from 'expo-sqlite';
 import { migrate } from '@/database/migrate';
 import { Suspense } from 'react';
+
+const db = SQLite.openDatabaseSync('target.db');
 
 export default function Layout() {
   const [fontsLoaded] = useFonts({
@@ -19,6 +23,8 @@ export default function Layout() {
     Inter_500Medium,
     Inter_700Bold
   });
+
+  useDrizzleStudio(db);
 
   if (!fontsLoaded) {
     return <Loading />;
