@@ -9,8 +9,8 @@ export async function migrate(database: SQLiteDatabase) {
       name TEXT NOT NULL,
       amount FLOAT NOT NULL,
 
-      create_at timestamp NOT NULL DEFAULT current_timestamp,
-      update_at timestamp NOT NULL DEFAULT current_timestamp
+      created_at timestamp NOT NULL DEFAULT current_timestamp,
+      updated_at timestamp NOT NULL DEFAULT current_timestamp
     );
 
       CREATE TABLE IF NOT EXISTS transactions (
@@ -19,8 +19,8 @@ export async function migrate(database: SQLiteDatabase) {
       amount FLOAT NOT NULL,
       observation TEXT,
 
-      create_at timestamp NOT NULL DEFAULT current_timestamp,
-      update_at timestamp NOT NULL DEFAULT current_timestamp,
+      created_at timestamp NOT NULL DEFAULT current_timestamp,
+      updated_at timestamp NOT NULL DEFAULT current_timestamp,
 
       FOREIGN KEY (target_id) REFERENCES targets(id) ON DELETE CASCADE
     );
