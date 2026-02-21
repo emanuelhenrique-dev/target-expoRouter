@@ -65,5 +65,5 @@ export function useTargetDataBase() {
     );
   }
 
-  return { create, listBySavedValue };
+  return { create, listBySavedValue, show };
 }
