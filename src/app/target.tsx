@@ -15,7 +15,7 @@ export default function Target() {
   const param = useLocalSearchParams<{ id?: string }>();
   const targetDatabase = useTargetDataBase();
 
-  function handleSave() {
+  async function handleSave() {
     if (!name.trim() || amount <= 0) {
       return Alert.alert(
         'Atenção',
@@ -26,9 +26,9 @@ export default function Target() {
     setIsProcessing(true);
 
     if (param.id) {
-      update();
+      await update();
     } else {
-      create();
+      await create();
     }
   }
 
