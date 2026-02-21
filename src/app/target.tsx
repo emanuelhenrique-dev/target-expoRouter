@@ -26,7 +26,7 @@ export default function Target() {
     setIsProcessing(true);
 
     if (param.id) {
-      // update
+      update();
     } else {
       create();
     }
@@ -40,6 +40,19 @@ export default function Target() {
       ]);
     } catch (error) {
       Alert.alert('Error', 'Não foi possível criar a meta');
+      console.log(error);
+      setIsProcessing(false);
+    }
+  }
+
+  async function update() {
+    try {
+      await targetDatabase.update({ id: Number(param.id), name, amount });
+      Alert.alert('Sucesso', 'Meta atualizada com sucesso', [
+        { text: 'Ok', onPress: router.back }
+      ]);
+    } catch (error) {
+      Alert.alert('Erro', 'Não foi possível atualizar a meta.');
       console.log(error);
       setIsProcessing(false);
     }
