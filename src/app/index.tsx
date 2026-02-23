@@ -1,4 +1,4 @@
-import { HomeHeader } from '@/components/HomeHeader';
+import { HomeHeader, HomeHeaderProps } from '@/components/HomeHeader';
 import { Alert, StatusBar, View } from 'react-native';
 import { Target, TargetProps } from '@/components/Target';
 import { List } from '@/components/List';
@@ -8,21 +8,19 @@ import { useTargetDataBase } from '@/database/useTargetDatabase';
 import { useCallback, useState } from 'react';
 import { Loading } from '@/components/Loading';
 import { numberToCurrency } from '@/utils/numberToCurrency';
-
-const summary = {
-  total: 'R$ 2.680,00',
-  input: { label: 'Entradas', value: 'R$ 6.184,90' },
-  output: { label: 'Saídas', value: '-R$ 883,65' }
-};
+import { useTransactionsDatabase } from '@/database/useTransactionsDatabase';
 
 export default function Index() {
+  const [summary, setSummary] = useState<HomeHeaderProps>();
   const [isFetching, setIsFetching] = useState(true);
   const [targets, setTargets] = useState<TargetProps[]>([]);
+
   const targetDatabase = useTargetDataBase();
+  const transactionsDatabase = useTransactionsDatabase();
 
   async function fetchTargets(): Promise<TargetProps[]> {
     try {
-      const response = await targetDatabase.listBySavedValue();
+      const response = await targetDatabase.listByClosestTarget();
       return response.map((item) => ({
         id: String(item.id),
         name: item.name,
@@ -36,13 +34,41 @@ export default function Index() {
     }
   }
 
+  async function fetchSummary(): Promise<HomeHeaderProps> {
+    try {
+      const response = await transactionsDatabase.summary();
+
+      return {
+        total: numberToCurrency(response.input + response.output),
+        input: {
+          label: 'Entradas',
+          value: numberToCurrency(response.input)
+        },
+        output: {
+          label: 'Saídas',
+          value: numberToCurrency(response.output)
+        }
+      };
+    } catch (error) {
+      Alert.alert('Error', 'Não foi possível carregar o resumo');
+      console.log(error);
+    }
+  }
+
   async function fetchData() {
     const targetDataPromise = fetchTargets();
+    const summaryDataPromise = fetchSummary();
 
-    const [targetData] = await Promise.all([targetDataPromise]);
-    console.log(targetData);
+    const [targetData, summaryData] = await Promise.all([
+      targetDataPromise,
+      summaryDataPromise
+    ]);
+
+    // console.log(targetData);
 
     setTargets(targetData);
+    setSummary(summaryData);
+
     setIsFetching(false);
   }
 
