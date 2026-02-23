@@ -11,7 +11,7 @@ import { TransactionTypes } from '@/utils/TransactionTypes';
 import dayjs from 'dayjs';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
 import { useCallback, useState } from 'react';
-import { Alert, View } from 'react-native';
+import { Alert, StatusBar, View } from 'react-native';
 
 export default function InProgress() {
   const params = useLocalSearchParams<{ id: string }>();
@@ -113,6 +113,7 @@ export default function InProgress() {
         gap: 32
       }}
     >
+      <StatusBar barStyle="dark-content" />
       <PageHeader
         title={details.name}
         rightButton={{
