@@ -20,7 +20,7 @@
 </p>
 
 <p align="center">
-  <img src=".github/image01.jpg" width="60%" />
+  <img src=".github/image01.jpeg" width="25%" />
 </p>
 
 Aplicação mobile para controle de metas financeiras, permitindo o registro de entradas, saídas e cálculo automático de saldo com persistência de dados local.
@@ -97,6 +97,6 @@ function show(id: number) {
 ```
 
 <p align="center">
-  <img src=".github/image02.jpg" width="40%" />
-   <img src=".github/image03.jpg" width="40%" />
+  <img src=".github/image02.jpeg" width="20%" />
+   <img src=".github/image03.jpeg" width="20%" />
 </p>
