@@ -19,7 +19,25 @@
   </a>
 </p>
 
+<p align="center">
+  <img src=".github/image01.jpg" width="60%" />
+</p>
+
 Aplicação mobile para controle de metas financeiras, permitindo o registro de entradas, saídas e cálculo automático de saldo com persistência de dados local.
+
+## 📲 Download e Projeto
+
+<p align="center">
+  <a href="https://drive.google.com/file/d/1nzie36gQSCJkbzuH5MmTNPsxxR_so1m8/view">
+    <img src="https://img.shields.io/badge/Google_Drive-APK-yellow?style=for-the-badge&logo=googledrive&logoColor=white" />
+  </a>
+  <a href="https://expo.dev/accounts/emanuelhenrique-dev/projects/target">
+    <img src="https://img.shields.io/badge/Expo-Project-000020?style=for-the-badge&logo=expo&logoColor=white" />
+  </a>
+  <a href="https://expo.dev/accounts/emanuelhenrique-dev/projects/target/builds">
+    <img src="https://img.shields.io/badge/EAS-Builds-green?style=for-the-badge&logo=android&logoColor=white" />
+  </a>
+</p>
 
 ## 🚀 Tecnologias
 
@@ -28,8 +46,7 @@ Aplicação mobile para controle de metas financeiras, permitindo o registro de 
 - TypeScript
 - **SQLite** (expo-sqlite) para banco de dados local
 - EAS Build (Android APK)
-- Tamagui / Styled-components (ajuste conforme o que usou para estilo)
-- Zod (validação de dados)
+- React Navigation
 
 ## 📦 Funcionalidades
 
@@ -58,9 +75,28 @@ const result = await db.execAsync(`
   VALUES ('Viagem de Férias', 5000.00)
 `);
 
-// Busca de dados com soma processada no banco
-const transactions = await db.getAllAsync(
-  'SELECT SUM(amount) as total FROM transactions WHERE goal_id = ?',
-  [goalId]
-);
+// Busca dos detalhes da meta no banco
+function show(id: number) {
+  return database.getFirstAsync<TargetResponse>(
+    `
+      SELECT
+        targets.id,
+        targets.name,
+        targets.amount,
+        COALESCE (SUM(transactions.amount), 0) AS current,
+        COALESCE ((SUM(transactions.amount) / targets.amount) * 100, 0) AS percentage,
+        targets.created_at,
+        targets.updated_at
+      FROM targets
+      LEFT JOIN transactions ON targets.id = transactions.target_id
+      WHERE targets.id = ?
+    `,
+    [id]
+  );
+}
 ```
+
+<p align="center">
+  <img src=".github/image02.jpg" width="40%" />
+   <img src=".github/image03.jpg" width="40%" />
+</p>
