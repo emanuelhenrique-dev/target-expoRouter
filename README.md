@@ -28,14 +28,14 @@ Aplicação mobile para controle de metas financeiras, permitindo o registro de 
 ## 📲 Download e Projeto
 
 <p align="center">
-  <a href="https://drive.google.com/file/d/1nzie36gQSCJkbzuH5MmTNPsxxR_so1m8/view">
-    <img src="https://img.shields.io/badge/Google_Drive-APK-yellow?style=for-the-badge&logo=googledrive&logoColor=white" />
+  <a href="https://drive.google.com/file/d/1nzie36gQSCJkbzuH5MmTNPsxxR_so1m8/view" target="_blank">
+    <img src="https://img.shields.io/badge/Google_Drive-APK-yellow?style=for-the-badge&logo=googledrive&logoColor=white" alt="Download APK Google Drive" />
   </a>
-  <a href="https://expo.dev/accounts/emanuelhenrique-dev/projects/target">
-    <img src="https://img.shields.io/badge/Expo-Project-000020?style=for-the-badge&logo=expo&logoColor=white" />
+  <a href="https://expo.dev/accounts/emanuelhenrique-dev/projects/target" target="_blank">
+    <img src="https://img.shields.io/badge/Expo-Project-000020?style=for-the-badge&logo=expo&logoColor=white" alt="Link do Projeto no Expo" />
   </a>
-  <a href="https://expo.dev/accounts/emanuelhenrique-dev/projects/target/builds">
-    <img src="https://img.shields.io/badge/EAS-Builds-green?style=for-the-badge&logo=android&logoColor=white" />
+  <a href="https://expo.dev/accounts/emanuelhenrique-dev/projects/target/builds" target="_blank">
+    <img src="https://img.shields.io/badge/EAS-Builds-green?style=for-the-badge&logo=android&logoColor=white" alt="Download APK via EAS" />
   </a>
 </p>
 
